@@ -10,4 +10,8 @@ Halaman Inventory
     Wait Until Element Is Visible    ${elementVerifyInvetoryPage}    5s
     Page Should Contain Element    ${elementVerifyInvetoryPage}
     Capture Page Screenshot
+
+Filter
+    Wait Until Element Is Visible    ${elementVerifyInvetoryPage}    5s
+    Click Element    ${Filter}
     

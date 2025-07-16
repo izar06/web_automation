@@ -9,3 +9,8 @@ Halaman Inventory Page
     Open Browser Source Demo
     Login    ${username}    ${password}
     Halaman Inventory
+
+Filter Inventory
+    Open Browser Source Demo
+    Login    ${username}    ${password}
+    Filter
