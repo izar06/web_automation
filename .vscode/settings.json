@@ -1,0 +1,5 @@
+{
+"robot.runArguments": [
+    "--outputdir", "Results"
+]
+}

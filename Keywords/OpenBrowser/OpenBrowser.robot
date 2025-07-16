@@ -1,8 +1,11 @@
 *** Settings ***
 Resource    ../../Settings/Settings.robot
 Resource    ../../Resources/Variables.robot
+Resource    ../../Function/Function.robot
 
 *** Keywords ***
 Open Browser Source Demo
-    Open Browser    ${URL}    chrome
-    Element Should Be Visible    ${titleLoginPage}
+    ${options}=    Setup Chrome Options
+    Create Webdriver    Chrome    options=${options}
+    Go To    ${URL}
+    Wait Until Element Is Visible    ${titleLoginPage}    10s
