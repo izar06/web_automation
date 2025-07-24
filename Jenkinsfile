@@ -6,9 +6,8 @@ pipeline {
     }
 
     options {
-        // Menambahkan timestamps & durasi untuk Blue Ocean
         timestamps()
-        durabilityHint('performanceOptimized')
+        durabilityHint(org.jenkinsci.plugins.workflow.flow.FlowDurabilityHint.PERFORMANCE_OPTIMIZED)
     }
 
     stages {
