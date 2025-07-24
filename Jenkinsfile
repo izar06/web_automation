@@ -7,7 +7,6 @@ pipeline {
 
     options {
         timestamps()
-        // durabilityHint dihapus untuk menghindari sandbox error
     }
 
     stages {
@@ -29,33 +28,22 @@ pipeline {
         stage('Archive Robot Artifacts') {
             steps {
                 echo '📦 Archiving test result files...'
-                archiveArtifacts artifacts: "${RESULTS_DIR}/*.xml, ${RESULTS_DIR}/*.html", fingerprint: true
+                archiveArtifacts artifacts: "${RESULTS_DIR}/*.xml, ${RESULTS_DIR}/*.html, ${RESULTS_DIR}/*.log", fingerprint: true
             }
         }
 
         stage('Publish HTML Report') {
             steps {
-                echo '📊 Publishing Robot report...'
+                echo '📊 Publishing Robot Framework HTML report...'
                 publishHTML(target: [
                     reportName : 'Robot Report',
                     reportDir  : "${RESULTS_DIR}",
-                    reportFiles: 'report.html',
+                    reportFiles: 'report.html,log.html',
                     keepAll    : true,
-                    alwaysLinkToLastBuild: true
+                    alwaysLinkToLastBuild: true,
+                    allowMissing: false
                 ])
             }
-        }
-    }
-
-    post {
-        always {
-            echo '🧹 Pipeline completed (success or fail)'
-        }
-        success {
-            echo '✅ Build SUCCESS!'
-        }
-        failure {
-            echo '❌ Build FAILED!'
         }
     }
 }
