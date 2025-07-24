@@ -7,7 +7,7 @@ pipeline {
 
     options {
         timestamps()
-        durabilityHint(org.jenkinsci.plugins.workflow.flow.FlowDurabilityHint.PERFORMANCE_OPTIMIZED)
+        // durabilityHint dihapus untuk menghindari sandbox error
     }
 
     stages {
