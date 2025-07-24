@@ -19,9 +19,9 @@ pipeline {
             }
         }
 
-        stage('Publish Robot Report') {
+        stage('Archive Robot Artifacts') {
             steps {
-                publishRobotResults outputPath: "${RESULTS_DIR}"
+                archiveArtifacts artifacts: "${RESULTS_DIR}/*.xml, ${RESULTS_DIR}/*.html", fingerprint: true
             }
         }
 
