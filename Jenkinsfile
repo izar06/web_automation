@@ -8,19 +8,20 @@ pipeline {
     stages {
         stage('Install Dependencies') {
             steps {
-                sh 'pip install -r requirements.txt'
+                sh 'python3 -m pip install --upgrade pip'
+                sh 'python3 -m pip install -r requirements.txt'
             }
         }
 
         stage('Run Robot Tests') {
             steps {
-                sh 'robot -d Results "Test Cases"'
+                sh 'python3 -m robot -d ${RESULTS_DIR} "Test Cases"'
             }
         }
 
         stage('Publish Robot Report') {
             steps {
-                publishRobotResults outputPath: 'Results'
+                publishRobotResults outputPath: "${RESULTS_DIR}"
             }
         }
 
@@ -28,7 +29,7 @@ pipeline {
             steps {
                 publishHTML(target: [
                     reportName : 'Robot Report',
-                    reportDir  : 'Results',
+                    reportDir  : "${RESULTS_DIR}",
                     reportFiles: 'report.html',
                     keepAll    : true,
                     alwaysLinkToLastBuild: true
